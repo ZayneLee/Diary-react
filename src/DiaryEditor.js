@@ -1,8 +1,6 @@
-import { memo, useContext, useEffect, useRef, useState } from "react";
-import { DiaryDispatchContext } from "./App";
+import { useRef, useState } from "react";
 
-const DiaryEditor = () => {
-  const { onCreate } = useContext(DiaryDispatchContext);
+const DiaryEditor = ({ onCreate }) => {
   const authorInput = useRef();
   const contentInput = useRef();
 
@@ -13,7 +11,6 @@ const DiaryEditor = () => {
   });
 
   const handleChangeState = (e) => {
-    console.log(e.target.value);
     setState({
       ...state,
       [e.target.name]: e.target.value,
@@ -25,7 +22,6 @@ const DiaryEditor = () => {
       authorInput.current.focus();
       return;
     }
-
     if (state.content.length < 5) {
       contentInput.current.focus();
       return;
@@ -38,7 +34,6 @@ const DiaryEditor = () => {
       emotion: 1,
     });
   };
-
   return (
     <div className="DiaryEditor">
       <h2>오늘의 일기</h2>
@@ -59,6 +54,7 @@ const DiaryEditor = () => {
         />
       </div>
       <div>
+        <span>오늘의 감정 점수 : </span>
         <select
           name="emotion"
           value={state.emotion}
@@ -70,12 +66,12 @@ const DiaryEditor = () => {
           <option value={4}>4</option>
           <option value={5}>5</option>
         </select>
-        <div>
-          <button onClick={handleSubmit}>일기 저장하기</button>
-        </div>
+      </div>
+      <div>
+        <button onClick={handleSubmit}>일기 저장하기</button>
       </div>
     </div>
   );
 };
 
-export default memo(DiaryEditor);
+export default DiaryEditor;

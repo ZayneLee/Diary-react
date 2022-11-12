@@ -1,9 +1,6 @@
-import { useContext } from "react";
-import { DiaryStateContext } from "./App";
 import DiaryItem from "./DiaryItem";
 
-const DiaryList = () => {
-  const diaryList = useContext(DiaryStateContext);
+const DiaryList = ({ diaryList }) => {
   return (
     <div className="DiaryList">
       <h2>일기 리스트</h2>
